@@ -13,6 +13,8 @@ import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 import { ProxyService } from '../proxy.service';
 import { DashboardService } from '../modules/dashboard.service';
+import { AreaFacebookComponent } from './widgets/area-facebook/area-facebook.component';
+import { PieFacebookComponent } from './widgets/pie-facebook/pie-facebook.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DashboardService } from '../modules/dashboard.service';
     SidebarComponent,
     AreaComponent,
     CardComponent,
-    PieComponent
+    PieComponent,
+    AreaFacebookComponent,
+    PieFacebookComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +45,9 @@ import { DashboardService } from '../modules/dashboard.service';
     SidebarComponent,
     AreaComponent,
     CardComponent,
-    PieComponent
+    PieComponent,
+    AreaFacebookComponent,
+    PieFacebookComponent,
   ],
   providers: [ProxyService, DashboardService],
 })

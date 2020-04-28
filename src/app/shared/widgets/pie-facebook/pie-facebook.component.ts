@@ -4,11 +4,11 @@ import HC_exporting from 'highcharts/modules/exporting';
 import { ProxyService } from '../../../proxy.service';
 
 @Component({
-  selector: 'app-widget-pie',
-  templateUrl: './pie.component.html',
-  styleUrls: ['./pie.component.scss']
+  selector: 'app-pie-facebook',
+  templateUrl: './pie-facebook.component.html',
+  styleUrls: ['./pie-facebook.component.scss']
 })
-export class PieComponent implements OnInit {
+export class PieFacebookComponent implements OnInit {
 
   Highcharts = Highcharts;
   chartOptions = {};
@@ -62,11 +62,11 @@ export class PieComponent implements OnInit {
     new Promise(resolve => {
       setTimeout(() => {
       resolve("I promise to return after 1 minute!");
-      }, 30000);
+      }, 60000);
       }).then((data) => {
       console.log("Printing PIE data");
-      const promise = this.proxyService.getStocksList(this.api_key, 'google').toPromise();
-      promise.then((data) => {
+      const promise = this.proxyService.getStocksList(this.api_key, 'yahoo').toPromise();
+    promise.then((data) => {
       var i=0;
       for (const d of (data as any)) {
         i++;
@@ -132,4 +132,5 @@ export class PieComponent implements OnInit {
     });
     
 }
+
 }

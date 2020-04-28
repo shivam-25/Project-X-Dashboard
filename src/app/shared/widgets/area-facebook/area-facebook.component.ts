@@ -3,13 +3,12 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { ProxyService } from '../../../proxy.service';
 
-
 @Component({
-  selector: 'app-widget-area',
-  templateUrl: './area.component.html',
-  styleUrls: ['./area.component.scss']
+  selector: 'app-area-facebook',
+  templateUrl: './area-facebook.component.html',
+  styleUrls: ['./area-facebook.component.scss']
 })
-export class AreaComponent implements OnInit {
+export class AreaFacebookComponent implements OnInit {
 
   chartOptions: {};
   updateFlag: boolean;
@@ -49,7 +48,7 @@ export class AreaComponent implements OnInit {
     this.updateFlag = true;
     this.oneToOneFlag = true;
     
-    const promise = this.proxyService.getStocksList(this.api_key, 'google').toPromise();
+    const promise = this.proxyService.getStocksList(this.api_key, 'yahoo').toPromise();
     promise.then((data) => {
       for (const d of (data as any)) {
         

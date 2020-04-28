@@ -8,44 +8,45 @@ import { HttpHeaders, HttpClientModule } from '@angular/common/http';
 })
 export class ProxyService {
   dataTemp: Observable<any>
-  private baseUrl = 'http://localhost:8083/getStocks';
-  stocks = [];
+  private baseUrl = 'http://$INGRESS_HOST:$INGRESS_PORT/getAllStocks';
+  // private baseUrl = 'http://localhost:8083/getStocks'
+  apiUrlFi = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
+  apiUrlSe = "&apikey=3DB68JJAT6E6BGWO"
+  
   element_data = [];
+  url_called="";
+  count=0;
+
   constructor(private http: HttpClient) { }
 
-  headers = new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
+  
 
-  getStocksList(api_key: string){
-    // console.log("in method freeAPIService");
-    // const promise = this.http.get(`${this.baseUrl}`).toPromise();
-    // console.log(promise);
-    // promise.then((data)=>{
-    //   for (const d of (data as any)) {
-    //     this.stocks.push({
-    //       symbol: d.symbol,
-    //       C1: Number(d.C1),
-    //       C2: Number(d.C2),
-    //       C3: Number(d.C3),
-    //       C4: Number(d.C4),
-    //       C5: Number(d.C5),
-    //       V1: Number(d.V1),
-    //       V2: Number(d.V2),
-    //       V3: Number(d.V3),
-    //       V4: Number(d.V4),
-    //       V5: Number(d.V5)
-    //     });
-    //     this.element_data.push({
-    //       position: 1,
-    //       name: d.symbol,
-    //       weight: Number(d.V1),
-    //       symbol: d.C1
-    //     })
-    //   }
-    //   console.log(this.stocks);
-    //   return this.stocks;
-    // }).catch((error)=>{
-    //   console.log("Promise rejected with " + JSON.stringify(error));
-    // });
-    return this.http.get(`${this.baseUrl}/${api_key}`);
+  getStocksList(api_key: string, headerVal: string){
+    let headers = new HttpHeaders()
+    headers = headers.set('Content-Type', 'application/json').set('api-type',headerVal);
+    return this.http.get(`${this.baseUrl}/${api_key}`,{headers});
+  }
+
+  getListOfStocks(symbol: string) {
+    
+      this.count = this.count + 1;
+      this.url_called = this.apiUrlFi+symbol+this.apiUrlSe;
+      return this.http.get(`${this.url_called}`);
+      // value.then((data) => 
+      // {
+      //   for (const d of (data as any)) {
+      //     var glq = d.$["Global Quote"];
+      //   }
+      //   this.element_data.push({
+      //     position: this.count, 
+      //     name: glq.$['01. symbol'], 
+      //     weight: Number(glq.$['05. price']), 
+      //     symbol: glq.$['10. change percent']
+      //   })
+      //   console.log("In getListStocks");
+      //   console.log(this.element_data);
+      // })
+    
+    
   }
 }
